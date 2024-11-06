@@ -17,8 +17,6 @@
     home-manager,
     ...
   } @ inputs: let
-    inherit (self) outputs;
-
     lib = nixpkgs.lib // home-manager.lib;
 
     forAllSystems = nixpkgs.lib.genAttrs [
@@ -51,7 +49,7 @@
       value = lib.nixosSystem {
         inherit specialArgs;
         inherit system;
-        modules = [./hosts/${hostname}];
+        modules = [.nixos/hosts/${hostname} ./nixos];
       };
     };
 
@@ -60,7 +58,7 @@
       value = lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.${(builtins.filter (c: c.hostname == host) nixosConfigSpecs).system};
         extraSpecialArgs = specialArgs;
-        modules = [ ./users/${name} ./users/${name}/hosts/${host}];
+        modules = [ ./home/${name} ./home/${name}/hosts/${host}];
       };
     };
 
@@ -68,10 +66,11 @@
     homeConfigs = builtins.listToAttrs map(mkHomeConfig homeConfigSpecs);
 
   in {
-    inherit lib;
-
     formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt-rfc-style);
-
+    overlays = import ./overlays {inherit inputs;};
+    packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
+    nixosModules = import ./modules/nixos;
+    homeManagerModules = import ./modules/home-manager;
     nixosConfigurations = nixosConfigs;
     homeConfigurations = homeConfigs;
   };
