@@ -2,6 +2,7 @@
 {
   lib,
   pkgs,
+  config,
   flake,
   ...
 }: {
@@ -47,5 +48,9 @@
     automatic-timezoned.enable = lib.mkDefault true;
   };
 
-  system.stateVersion = lib.mkDefault "25.05";
+  system = {
+    nixos.label = "GitRev.${config.system.configurationRevision}.Rel.${config.system.nixos.release}"; # Tag each generation with Git hash
+    configurationRevision = flake.rev or flake.dirtyRev or null;
+    stateVersion = lib.mkDefault "25.05";
+  };
 }

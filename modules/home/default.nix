@@ -1,8 +1,10 @@
 {...}: {
   imports = [
     ./ghostty
-    ./neovim
-    ./sway
     ./git
+    ./neovim
+    ./rofi
+    ./sway
+    ./zsh
   ];
 }

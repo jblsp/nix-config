@@ -19,7 +19,7 @@ in {
       extraPackages = with pkgs; [
         # Neovim Dependencies
         ripgrep
-
+        gcc
         # Lazy dependencies
         git
 

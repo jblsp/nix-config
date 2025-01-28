@@ -14,6 +14,11 @@ in {
   config = lib.mkIf cfg.enable {
     programs.ghostty = {
       enable = true;
+      settings = {
+        theme = "catppuccin-mocha";
+        mouse-hide-while-typing = true;
+        font-feature = "-calt";
+      };
     };
   };
 }
