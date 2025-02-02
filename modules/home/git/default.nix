@@ -20,6 +20,9 @@ in {
         ".DS_Store"
         "*.swp"
       ];
+      aliases = {
+        "root" = "rev-parse --show-toplevel";
+      };
       extraConfig = {
         init.defaultBranch = "main";
       };

@@ -1,6 +1,7 @@
 {
   lib,
   config,
+  pkgs,
   ...
 }: let
   cfg = config.modules.zsh;
@@ -24,6 +25,16 @@ in {
         enable = true;
         plugins = ["colored-man-pages" "gitignore"];
       };
+      plugins = [
+        {
+          name = "powerlevel10k";
+          src = pkgs.zsh-powerlevel10k;
+          file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+        }
+      ];
+      initExtra = ''
+        source ${./.p10k.zsh}
+      '';
     };
   };
 }

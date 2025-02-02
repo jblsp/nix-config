@@ -14,15 +14,21 @@
   nix = {
     settings = {
       experimental-features = "nix-command flakes";
+      auto-optimise-store = lib.mkDefault true;
     };
     gc = {
       automatic = lib.mkDefault true;
-      options = lib.mkDefault "--delete-older-than 30d";
+      options = lib.mkDefault "--delete-older-than 3w";
       dates = lib.mkDefault "weekly";
     };
   };
 
-  nixpkgs.config.allowUnfree = lib.mkDefault true;
+  nixpkgs = {
+    config = {
+      allowUnfree = lib.mkDefault true;
+    };
+    overlays = [flake.inputs.nur.overlays.default];
+  };
 
   environment.systemPackages = with pkgs; [
     git
@@ -36,6 +42,7 @@
   in {
     useGlobalPkgs = lib.mkDefault true;
     useUserPackages = lib.mkDefault true;
+    extraSpecialArgs = { inherit flake; };
     sharedModules = [
       ../modules/home
       globalHome

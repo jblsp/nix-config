@@ -20,6 +20,7 @@ in {
         # Neovim Dependencies
         ripgrep
         gcc
+
         # Lazy dependencies
         git
 

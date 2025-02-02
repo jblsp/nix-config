@@ -6,5 +6,7 @@
     ./rofi
     ./sway
     ./zsh
+    ./firefox
+    ./discord
   ];
 }
