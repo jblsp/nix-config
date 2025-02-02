@@ -1,7 +1,0 @@
-keep both nixos/hm modules in /modules
-make all modules options/config style and import all of them and set the options in hosts/hostname/default
-symlink the dotfiles folder to /etc/nixos
-create a new attrset (nixosConfigs) and map it (like in nix-test-config)
-import home-manager in the flake
-set the networking.hostname in the flake
-
