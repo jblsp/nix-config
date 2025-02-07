@@ -5,10 +5,8 @@
 }: let
   cfg = config.modules.waybar;
 in {
-  options.modules = {
-    waybar = {
+  options.modules.waybar = {
       enable = lib.mkEnableOption "Enable waybar";
-    };
   };
 
   config = lib.mkIf cfg.enable {

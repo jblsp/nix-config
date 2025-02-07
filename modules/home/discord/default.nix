@@ -10,10 +10,8 @@ in {
     flake.inputs.nixcord.homeManagerModules.nixcord
   ];
 
-  options.modules = {
-    discord = {
-      enable = lib.mkEnableOption "Enable discord";
-    };
+  options.modules.discord = {
+    enable = lib.mkEnableOption "Enable discord";
   };
 
   config = lib.mkIf cfg.enable {
@@ -39,7 +37,10 @@ in {
           friendsSince.enable = true;
           fullSearchContext.enable = true;
           keepCurrentChannel.enable = true;
-          memberCount.enable = true;
+          memberCount = {
+            enable = true;
+            memberList = false;
+          };
           mentionAvatars.enable = true;
           messageLinkEmbeds.enable = true;
           messageLogger.enable = true;
@@ -51,7 +52,6 @@ in {
           noF1.enable = true;
           noOnboardingDelay.enable = true;
           noPendingCount.enable = true;
-          noScreensharePreview.enable = true;
           noTypingAnimation.enable = true;
           openInApp.enable = true;
           previewMessage.enable = true;

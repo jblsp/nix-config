@@ -1,27 +1,48 @@
 {
   lib,
   config,
+  pkgs,
   ...
 }: let
   cfg = config.modules.ghostty;
 in {
-  options.modules = {
-    ghostty = {
-      enable = lib.mkEnableOption "Enable ghostty";
+  options.modules.ghostty = {
+    enable = lib.mkEnableOption "Enable ghostty";
+    theme = lib.mkOption {
+      default =
+        if pkgs.stdenv.isDarwin
+        then "Apple System Colors"
+        else "catppuccin-mocha";
+      type = lib.types.str;
+    };
+    windowDecorations = lib.mkOption {
+      default =
+        if pkgs.stdenv.isDarwin
+        then "auto"
+        else "none";
+      type = lib.types.str;
     };
   };
 
   config = lib.mkIf cfg.enable {
-    programs.ghostty = {
-      enable = true;
-      settings = {
-        theme = "catppuccin-mocha";
-        mouse-hide-while-typing = true;
-        font-feature = "-calt";
-        window-decoration = "none";
-        window-theme = "ghostty";
-        shell-integration-features = "no-cursor";
-      };
-    };
+    programs.ghostty =
+      lib.recursiveUpdate {
+        enable = true;
+        settings = {
+          mouse-hide-while-typing = true;
+          font-feature = "-calt";
+          window-decoration = cfg.windowDecorations;
+          window-theme = "ghostty";
+          shell-integration-features = "no-cursor";
+        };
+      }
+      (lib.mergeAttrsList [
+        (lib.optionalAttrs pkgs.stdenv.isDarwin {
+          package = null;
+        })
+        (lib.optionalAttrs (cfg.theme != null) {
+          settings.theme = cfg.theme;
+        })
+      ]);
   };
 }

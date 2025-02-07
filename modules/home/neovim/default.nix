@@ -6,10 +6,8 @@
 }: let
   cfg = config.modules.neovim;
 in {
-  options.modules = {
-    neovim = {
-      enable = lib.mkEnableOption "Enable neovim";
-    };
+  options.modules.neovim = {
+    enable = lib.mkEnableOption "Enable neovim";
   };
 
   config = lib.mkIf cfg.enable {

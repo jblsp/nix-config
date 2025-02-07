@@ -5,10 +5,8 @@
 }: let
   cfg = config.modules.git;
 in {
-  options.modules = {
-    git = {
-      enable = lib.mkEnableOption "Enable git";
-    };
+  options.modules.git = {
+    enable = lib.mkEnableOption "Enable git";
   };
 
   config = lib.mkIf cfg.enable {
