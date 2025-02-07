@@ -1,12 +1,12 @@
 {...}: {
   imports = [
+    ./discord
+    ./firefox
     ./ghostty
     ./git
     ./neovim
-    ./rofi
     ./sway
+    ./waybar
     ./zsh
-    ./firefox
-    ./discord
   ];
 }

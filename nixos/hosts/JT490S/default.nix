@@ -5,11 +5,11 @@
 }: {
   imports = [
     ./hardware-configuration.nix
-    flake.inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t480s
+    flake.inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t490s
   ];
 
   boot = {
-   loader = {
+    loader = {
       systemd-boot = {
         enable = true;
         configurationLimit = 25;
@@ -20,6 +20,14 @@
 
   hardware = {
     graphics.enable = true;
+    bluetooth = {
+      enable = true;
+      settings = {
+        General = {
+          Enable = "Source,Sink,Media,Socker";
+        };
+      };
+    };
   };
 
   networking = {
@@ -64,6 +72,9 @@
     wl-clipboard
     chromium
     fastfetch
+    wezterm
+    overskride
+    nodejs_22
   ];
 
   users.users.joe = {
@@ -75,14 +86,14 @@
 
   home-manager.users.joe = {...}: {
     modules = {
-      neovim.enable = true;
-      sway.enable = true;
+      discord.enable = true;
+      firefox.enable = true;
       ghostty.enable = true;
       git.enable = true;
-      rofi.enable = true;
+      neovim.enable = true;
+      sway.enable = true;
+      waybar.enable = true;
       zsh.enable = true;
-      firefox.enable = true;
-      discord.enable = true;
     };
 
     programs.gh.enable = true;

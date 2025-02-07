@@ -93,6 +93,11 @@ in {
                 iconUpdateURL = "https://nixos.org/favicon.png";
                 definedAliases = ["@hmo" "@homemanageroptions"];
               };
+              "GitHub" = {
+                urls = [{template = "https://github.com/search?q={searchTerms}&type=repositories";}];
+                iconUpdateURL = "https://github.com/favicon.ico";
+                definedAliases = ["@gh" "@github"];
+              };
             };
           };
           settings = {

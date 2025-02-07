@@ -27,20 +27,10 @@ in {
           "${swaycfg.modifier}+${swaycfg.up}" = "focus up";
           "${swaycfg.modifier}+${swaycfg.right}" = "focus right";
 
-          "${swaycfg.modifier}+Left" = "focus left";
-          "${swaycfg.modifier}+Down" = "focus down";
-          "${swaycfg.modifier}+Up" = "focus up";
-          "${swaycfg.modifier}+Right" = "focus right";
-
           "${swaycfg.modifier}+Shift+${swaycfg.left}" = "move left";
           "${swaycfg.modifier}+Shift+${swaycfg.down}" = "move down";
           "${swaycfg.modifier}+Shift+${swaycfg.up}" = "move up";
           "${swaycfg.modifier}+Shift+${swaycfg.right}" = "move right";
-
-          "${swaycfg.modifier}+Shift+Left" = "move left";
-          "${swaycfg.modifier}+Shift+Down" = "move down";
-          "${swaycfg.modifier}+Shift+Up" = "move up";
-          "${swaycfg.modifier}+Shift+Right" = "move right";
 
           "${swaycfg.modifier}+b" = "splith";
           "${swaycfg.modifier}+v" = "splitv";

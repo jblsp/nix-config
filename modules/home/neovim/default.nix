@@ -15,33 +15,46 @@ in {
   config = lib.mkIf cfg.enable {
     programs.neovim = {
       enable = true;
-      defaultEditor = true;
+      extraWrapperArgs = let
+        nvim-treesitter-parsers = let
+          nvim-treesitter = pkgs.vimPlugins.nvim-treesitter;
+        in
+          builtins.map (grammar: nvim-treesitter.grammarToPlugin grammar) nvim-treesitter.allGrammars;
+      in [
+        "--set"
+        "NVIM_TREESITTER_PARSERS"
+        (lib.concatStringsSep "," nvim-treesitter-parsers)
+      ];
       extraPackages = with pkgs; [
         # Neovim Dependencies
         ripgrep
-        gcc
 
         # Lazy dependencies
         git
+        luarocks
+
+        # Treesitter dependencies
+        gcc
 
         # Language Servers
-        lua-language-server
-        pyright
-        jdt-language-server
         haskell-language-server
+        jdt-language-server
+        lua-language-server
         nixd
+        pyright
+        typescript-language-server
 
         # Formatters
-        stylua
+        alejandra
         black
         isort
         prettierd
-        alejandra
+        stylua
 
         # Linters
-        selene
-        pylint
         markdownlint-cli2
+        pylint
+        selene
       ];
     };
   };

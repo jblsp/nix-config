@@ -32,11 +32,10 @@
         system = "x86_64-linux";
         specialArgs = {
           flake = self;
-          util = import ./util;
         };
         modules = [
-          ./config
-          ./hosts/JT490S
+          ./nixos/config
+          ./nixos/hosts/JT490S
           {
             networking.hostName = "JT490S";
           }

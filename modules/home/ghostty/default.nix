@@ -18,6 +18,9 @@ in {
         theme = "catppuccin-mocha";
         mouse-hide-while-typing = true;
         font-feature = "-calt";
+        window-decoration = "none";
+        window-theme = "ghostty";
+        shell-integration-features = "no-cursor";
       };
     };
   };

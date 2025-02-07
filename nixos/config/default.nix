@@ -7,7 +7,7 @@
   ...
 }: {
   imports = [
-    ../modules/os
+    ../../modules/os
     flake.inputs.home-manager.nixosModules.home-manager
   ];
 
@@ -18,7 +18,7 @@
     };
     gc = {
       automatic = lib.mkDefault true;
-      options = lib.mkDefault "--delete-older-than 3w";
+      options = lib.mkDefault "--delete-older-than 14d";
       dates = lib.mkDefault "weekly";
     };
   };
@@ -44,16 +44,13 @@
     useUserPackages = lib.mkDefault true;
     extraSpecialArgs = { inherit flake; };
     sharedModules = [
-      ../modules/home
+      ../../modules/home
       globalHome
     ];
   };
 
   i18n.defaultLocale = lib.mkDefault "en_US.UTF-8";
-
-  services = {
-    automatic-timezoned.enable = lib.mkDefault true;
-  };
+  time.timeZone = lib.mkDefault "America/New_York";
 
   system = {
     nixos.label = "GitRev.${config.system.configurationRevision}.Rel.${config.system.nixos.release}"; # Tag each generation with Git hash
