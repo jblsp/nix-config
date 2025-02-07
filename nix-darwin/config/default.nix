@@ -53,6 +53,7 @@
   };
 
   system = {
+    startup.chime = false;
     configurationRevision = flake.rev or flake.dirtyRev or null;
     stateVersion = lib.mkDefault 5;
   };

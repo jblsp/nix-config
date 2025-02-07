@@ -1,5 +1,6 @@
 {
   pkgs,
+  config,
   flake,
   ...
 }: let
@@ -27,20 +28,26 @@ in {
       ghostty.enable = true;
       git.enable = true;
       neovim.enable = true;
-      zsh.enable = true;
+      bash.enable = true;
+      starship.enable = true;
     };
   };
 
-  users.users = {
-    "${userName}" = {
-      home = homeDir;
-      description = "Joe Sparma";
+  users = {
+    users = {
+      "${userName}" = {
+        home = homeDir;
+        description = "Joe Sparma";
+        uid = 501;
+        shell = pkgs.bashInteractive;
+      };
     };
+    knownUsers = builtins.attrNames config.users.users;
   };
+  programs.bash.enable = true;
 
   environment = {
-    pathsToLink = ["/share/zsh"];
-    # This is set because darwin-rebuild looks in /etc/nix-darwin/ 
+    # This is set because darwin-rebuild looks in /etc/nix-darwin/
     etc."nix-darwin/flake.nix".source = "${homeDir}/nix-config/flake.nix";
     variables = {
       NIX_DARWIN_CONFIG = "${homeDir}/nix-config/";
@@ -48,7 +55,7 @@ in {
     systemPackages = with pkgs; [
       cowsay
       fastfetch
-      jdk
+      # jdk
       gh
       lazygit
       alejandra
