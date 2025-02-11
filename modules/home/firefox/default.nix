@@ -104,7 +104,11 @@ in {
               "extensions.autoDisableScopes" = 0;
 
               # Disable bookmarks toolbar
-              "browser.toolbars.bookmarks.visibility" = "newtab";
+              "browser.toolbars.bookmarks.visibility" = "never";
+
+              # Tab Sidebar
+              "sidebar.revamp" = true;
+              "sidebar.verticalTabs" = true;
 
               # URL Bar
               "browser.urlbar.suggest.history" = false;

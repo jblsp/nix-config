@@ -29,6 +29,7 @@
       "libreoffice"
       "steam"
       "firefox"
+      "calibre"
     ];
     onActivation = {
       cleanup = "zap";

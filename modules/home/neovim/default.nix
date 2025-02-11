@@ -2,6 +2,7 @@
   lib,
   config,
   pkgs,
+  flake,
   ...
 }: let
   cfg = config.modules.neovim;

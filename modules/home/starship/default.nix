@@ -14,16 +14,10 @@ in {
   config = lib.mkIf cfg.enable {
     programs.starship = {
       enable = true;
-      settings =
-        lib.recursiveUpdate
-        (lib.mergeAttrsList [
-          (getPreset "nerd-font-symbols")
-          (getPreset "pure-prompt")
-        ]) {
-          username = {
-            show_always = true;
-          };
-        };
+      settings = lib.foldl' lib.recursiveUpdate {} [
+        (getPreset "nerd-font-symbols")
+        (getPreset "gruvbox-rainbow")
+      ];
     };
   };
 }

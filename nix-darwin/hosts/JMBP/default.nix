@@ -13,14 +13,11 @@ in {
     ./macos-defaults.nix
   ];
 
-  home-manager.backupFileExtension = "backup";
   home-manager.users.${userName} = {...}: {
     home = {
       username = userName;
       homeDirectory = homeDir;
     };
-
-    programs.firefox.package = null;
 
     modules = {
       discord.enable = true;
@@ -47,15 +44,12 @@ in {
   programs.bash.enable = true;
 
   environment = {
-    # This is set because darwin-rebuild looks in /etc/nix-darwin/
-    etc."nix-darwin/flake.nix".source = "${homeDir}/nix-config/flake.nix";
-    variables = {
-      NIX_DARWIN_CONFIG = "${homeDir}/nix-config/";
-    };
+    darwinFlakeConfig = "${homeDir}/nix-config";
     systemPackages = with pkgs; [
       cowsay
       fastfetch
-      # jdk
+      jdk
+      nodejs_22
       gh
       lazygit
       alejandra
@@ -63,6 +57,7 @@ in {
       ghc
       yazi
       tokei
+      spotify
     ];
   };
 

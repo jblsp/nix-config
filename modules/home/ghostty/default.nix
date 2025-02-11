@@ -25,8 +25,8 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    programs.ghostty =
-      lib.recursiveUpdate {
+    programs.ghostty = lib.foldl' lib.recursiveUpdate {} [
+      {
         enable = true;
         settings = {
           mouse-hide-while-typing = true;
@@ -36,13 +36,12 @@ in {
           shell-integration-features = "no-cursor";
         };
       }
-      (lib.mergeAttrsList [
-        (lib.optionalAttrs pkgs.stdenv.isDarwin {
-          package = null;
-        })
-        (lib.optionalAttrs (cfg.theme != null) {
-          settings.theme = cfg.theme;
-        })
-      ]);
+      (lib.optionalAttrs pkgs.stdenv.isDarwin {
+        package = null;
+      })
+      (lib.optionalAttrs (cfg.theme != null) {
+        settings.theme = cfg.theme;
+      })
+    ];
   };
 }
