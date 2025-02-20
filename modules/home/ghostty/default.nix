@@ -29,11 +29,12 @@ in {
       {
         enable = true;
         settings = {
-          mouse-hide-while-typing = true;
+          auto-update = "off";
           font-feature = "-calt";
+          mouse-hide-while-typing = true;
+          shell-integration-features = "no-cursor";
           window-decoration = cfg.windowDecorations;
           window-theme = "ghostty";
-          shell-integration-features = "no-cursor";
         };
       }
       (lib.optionalAttrs pkgs.stdenv.isDarwin {

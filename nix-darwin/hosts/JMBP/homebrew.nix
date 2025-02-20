@@ -30,6 +30,7 @@
       "steam"
       "firefox"
       "calibre"
+      "keyboard-cleaner"
     ];
     onActivation = {
       cleanup = "zap";

@@ -18,13 +18,15 @@ in {
           "joe" = {
             id = 0;
             isDefault = true;
-            extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-              ublock-origin
-              bitwarden
-              # bypass-paywalls-clean
-              return-youtube-dislikes
-              sponsorblock
-            ];
+            extensions = {
+              packages = with pkgs.nur.repos.rycee.firefox-addons; [
+                ublock-origin
+                bitwarden
+                # bypass-paywalls-clean
+                return-youtube-dislikes
+                sponsorblock
+              ];
+            };
             search = {
               force = true;
               default = "DuckDuckGo";
@@ -78,7 +80,7 @@ in {
                   definedAliases = ["@cfr" "@cfbr" "@collegefootballreference"];
                 };
                 "Arch Wiki" = {
-                  urls = [{template = "https://wiki.archlinux.org/index.php?search=s";}];
+                  urls = [{template = "https://wiki.archlinux.org/index.php?search={searchTerms}";}];
                   iconUpdateURL = "https://wiki.archlinux.org/favicon.ico";
                   definedAliases = ["@archw" "@archwiki"];
                 };

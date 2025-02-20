@@ -13,6 +13,10 @@ in {
     ./macos-defaults.nix
   ];
 
+  modules = {
+    aerospace.enable = true;
+  };
+
   home-manager.users.${userName} = {...}: {
     home = {
       username = userName;
@@ -26,7 +30,6 @@ in {
       git.enable = true;
       neovim.enable = true;
       bash.enable = true;
-      starship.enable = true;
     };
   };
 
@@ -58,6 +61,7 @@ in {
       yazi
       tokei
       spotify
+      mpv
     ];
   };
 
@@ -65,11 +69,5 @@ in {
     computerName = "Joe's MacBook Pro";
     knownNetworkServices = ["Wi-Fi"];
     dns = ["8.8.8.8" "8.8.4.4"];
-  };
-
-  services.aerospace = {
-    enable = true;
-    settings = {
-    };
   };
 }
