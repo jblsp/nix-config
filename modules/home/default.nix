@@ -5,6 +5,7 @@
     ./firefox
     ./ghostty
     ./git
+    ./hyprland
     ./neovim
     ./starship
     ./sway

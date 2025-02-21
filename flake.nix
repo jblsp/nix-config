@@ -63,6 +63,19 @@
           }
         ];
       };
+      "JT1" = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = {
+          flake = self;
+        };
+        modules = [
+          ./nixos/config
+          ./nixos/hosts/JT1
+          {
+            networking.hostName = "JT1";
+          }
+        ];
+      };
     };
 
     darwinConfigurations = {

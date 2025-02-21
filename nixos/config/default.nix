@@ -38,6 +38,7 @@
     useGlobalPkgs = lib.mkDefault true;
     useUserPackages = lib.mkDefault true;
     extraSpecialArgs = {inherit flake;};
+    backupFileExtension = "backup";
     sharedModules = [
       ../../modules/home
       globalHome
