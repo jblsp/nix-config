@@ -4,7 +4,7 @@
   flake,
   ...
 }: let
-  cfg = config.modules.git;
+  cfg = config.modules.discord;
 in {
   imports = [
     flake.inputs.nixcord.homeManagerModules.nixcord
@@ -17,6 +17,15 @@ in {
   config = lib.mkIf cfg.enable {
     programs.nixcord = {
       enable = true;
+      discord = {
+        enable = false;
+      };
+      vesktop = {
+        enable =
+          if cfg.enable
+          then true
+          else false;
+      };
       config = {
         frameless = true;
         plugins = {

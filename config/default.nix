@@ -2,12 +2,19 @@
 {
   lib,
   config,
+  pkgs,
   flake,
   ...
 }: {
   imports = [
-    ../../modules/os
+    # make os modules available
+    ../modules/os
+
+    # flake inputs modules
     flake.inputs.home-manager.nixosModules.home-manager
+
+    # configuration
+    ./home-manager.nix
   ];
 
   nix = {
@@ -29,21 +36,10 @@
     overlays = [flake.inputs.nur.overlays.default];
   };
 
-  home-manager = let
-    globalHome = {...}: {
-      programs.home-manager.enable = true;
-      home.stateVersion = lib.mkDefault "25.05";
-    };
-  in {
-    useGlobalPkgs = lib.mkDefault true;
-    useUserPackages = lib.mkDefault true;
-    extraSpecialArgs = {inherit flake;};
-    backupFileExtension = "backup";
-    sharedModules = [
-      ../../modules/home
-      globalHome
-    ];
-  };
+  environment.systemPackages = with pkgs; [
+    git
+    fastfetch
+  ];
 
   i18n.defaultLocale = lib.mkDefault "en_US.UTF-8";
   time.timeZone = lib.mkDefault "America/New_York";

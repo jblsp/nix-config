@@ -14,13 +14,21 @@ in {
       config = {
         modifier = "Mod4";
         terminal = "ghostty";
+        menu = "wofi --show drun";
         defaultWorkspace = "workspace number 1";
+        bars = [{command = "waybar";}];
+        input = {
+          "type:keyboard" = {
+            repeat_delay = "285";
+            repeat_rate = "28";
+          };
+        };
         keybindings = let
           swaycfg = config.wayland.windowManager.sway.config;
         in {
-          "${swaycfg.modifier}+Return" = "exec ${swaycfg.terminal}";
+          "${swaycfg.modifier}+t" = "exec ${swaycfg.terminal}";
           "${swaycfg.modifier}+Shift+q" = "kill";
-          "${swaycfg.modifier}+d" = "exec ${swaycfg.menu}";
+          "${swaycfg.modifier}+Space" = "exec ${swaycfg.menu}";
 
           "${swaycfg.modifier}+${swaycfg.left}" = "focus left";
           "${swaycfg.modifier}+${swaycfg.down}" = "focus down";
@@ -42,7 +50,7 @@ in {
           "${swaycfg.modifier}+e" = "layout toggle split";
 
           "${swaycfg.modifier}+Shift+space" = "floating toggle";
-          "${swaycfg.modifier}+space" = "focus mode_toggle";
+          "${swaycfg.modifier}+m" = "focus mode_toggle";
 
           "${swaycfg.modifier}+1" = "workspace number 1";
           "${swaycfg.modifier}+2" = "workspace number 2";

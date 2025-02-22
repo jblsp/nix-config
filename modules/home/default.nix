@@ -5,11 +5,10 @@
     ./firefox
     ./ghostty
     ./git
-    ./hyprland
     ./neovim
-    ./starship
+    ./ssh
     ./sway
     ./waybar
-    ./zsh
+    ./wofi
   ];
 }

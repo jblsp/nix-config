@@ -1,0 +1,24 @@
+* {
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  margin: 0;
+  font-size: 11px;
+}
+
+window#waybar {
+  background: #292828;
+  color: #ffffff;
+}
+
+#workspaces button {
+  margin-right: 10px;
+  color: #ffffff;
+}
+#workspaces button:hover, #workspaces button:active {
+  background-color: #292828;
+  color: #ffffff;
+}
+#workspaces button.focused {
+  background-color: #383737;
+}

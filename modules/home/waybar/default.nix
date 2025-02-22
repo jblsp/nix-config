@@ -6,7 +6,7 @@
   cfg = config.modules.waybar;
 in {
   options.modules.waybar = {
-      enable = lib.mkEnableOption "Enable waybar";
+    enable = lib.mkEnableOption "Enable waybar";
   };
 
   config = lib.mkIf cfg.enable {
@@ -24,19 +24,16 @@ in {
 
           modules-right = [
             "pulseaudio"
-            "backlight"
             "bluetooth"
             "network"
             "disk"
             "memory"
             "cpu"
-            "temperature"
-            "battery"
-            "tray"
             "clock"
           ];
         };
       };
+      style = builtins.readFile ./style.css;
     };
   };
 }
