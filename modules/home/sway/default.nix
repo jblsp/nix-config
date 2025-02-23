@@ -1,6 +1,7 @@
 {
   lib,
   config,
+  pkgs,
   ...
 }: let
   cfg = config.modules.sway;
@@ -9,8 +10,24 @@ in {
     enable = lib.mkEnableOption "Enables sway";
   };
   config = lib.mkIf cfg.enable {
+    home.packages = with pkgs; [
+      swaybg
+    ];
+    xdg.portal = {
+      enable = true;
+      extraPortals = with pkgs; [xdg-desktop-portal-gtk xdg-desktop-portal-wlr];
+      config = {
+        sway = {
+          default = ["gtk"];
+          "org.freedesktop.impl.portal.Screenshot" = ["wlr"];
+          "org.freedesktop.impl.portal.ScreenCast" = ["wlr"];
+        };
+      };
+    };
     wayland.windowManager.sway = {
       enable = true;
+      checkConfig = false;
+      wrapperFeatures.base = false;
       config = {
         modifier = "Mod4";
         terminal = "ghostty";
@@ -23,11 +40,26 @@ in {
             repeat_rate = "28";
           };
         };
+        window = {
+          titlebar = false;
+          border = 3;
+        };
+        floating = {
+          border = 3;
+          titlebar = false;
+        };
+        output = {
+          DP-2 = {
+            bg = "${config.home.homeDirectory}/Pictures/wallpapers/wallhaven-qd1qj7_2560x1440.png fill";
+          };
+        };
+        gaps = {
+          smartBorders = "no_gaps";
+        };
         keybindings = let
           swaycfg = config.wayland.windowManager.sway.config;
         in {
-          "${swaycfg.modifier}+t" = "exec ${swaycfg.terminal}";
-          "${swaycfg.modifier}+Shift+q" = "kill";
+          "${swaycfg.modifier}+w" = "kill";
           "${swaycfg.modifier}+Space" = "exec ${swaycfg.menu}";
 
           "${swaycfg.modifier}+${swaycfg.left}" = "focus left";
@@ -42,15 +74,19 @@ in {
 
           "${swaycfg.modifier}+b" = "splith";
           "${swaycfg.modifier}+v" = "splitv";
-          "${swaycfg.modifier}+f" = "fullscreen toggle";
+          "${swaycfg.modifier}+shift+f" = "fullscreen toggle";
           "${swaycfg.modifier}+a" = "focus parent";
 
-          "${swaycfg.modifier}+s" = "layout stacking";
-          "${swaycfg.modifier}+w" = "layout tabbed";
-          "${swaycfg.modifier}+e" = "layout toggle split";
+          "${swaycfg.modifier}+t" = "layout tabbed";
+          "${swaycfg.modifier}+s" = "layout toggle split";
 
-          "${swaycfg.modifier}+Shift+space" = "floating toggle";
+          "${swaycfg.modifier}+f" = "floating toggle";
           "${swaycfg.modifier}+m" = "focus mode_toggle";
+
+          "${swaycfg.modifier}+Shift+c" = "reload";
+          "${swaycfg.modifier}+Shift+q" = "exec swaymsg exit";
+
+          "${swaycfg.modifier}+r" = "mode resize";
 
           "${swaycfg.modifier}+1" = "workspace number 1";
           "${swaycfg.modifier}+2" = "workspace number 2";
@@ -74,14 +110,6 @@ in {
           "${swaycfg.modifier}+Shift+9" = "move container to workspace number 9";
           "${swaycfg.modifier}+Shift+0" = "move container to workspace number 0";
 
-          "${swaycfg.modifier}+Shift+minus" = "move scratchpad";
-          "${swaycfg.modifier}+minus" = "scratchpad show";
-
-          "${swaycfg.modifier}+Shift+c" = "reload";
-          "${swaycfg.modifier}+Shift+e" = "exec swaymsg exit";
-
-          "${swaycfg.modifier}+r" = "mode resize";
-
           # Brightness
           "XF86MonBrightnessDown" = "exec light -U 10";
           "XF86MonBrightnessUp" = "exec light -A 10";
@@ -92,16 +120,6 @@ in {
           "XF86AudioMute" = "exec 'wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle'";
         };
       };
-      # extraConfig = ''
-      #   # Brightness
-      #   bindsym XF86MonBrightnessDown exec light -U 10
-      #   bindsym XF86MonBrightnessUp exec light -A 10
-      #
-      #   # Volume
-      #   bindsym XF86AudioRaiseVolume exec 'wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%+'
-      #   bindsym XF86AudioLowerVolume exec 'wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%-'
-      #   bindsym XF86AudioMute exec 'wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle'
-      # '';
     };
   };
 }

@@ -37,7 +37,7 @@ in {
         alejandra
         black
         isort
-        prettierd
+        nodePackages.prettier
         stylua
 
         # Linters

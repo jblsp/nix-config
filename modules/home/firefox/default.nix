@@ -191,6 +191,9 @@ in {
             # Disable firefox relay
             "signon.firefoxRelay.feature" = "";
 
+            # Tabs
+            "browser.tabs.closeWindowWithLastTab" = false;
+
             # Fastfox 133.0 (https://github.com/yokoffing/Betterfox/blob/main/Fastfox.js)
             "content.notify.interval" = 100000;
             "gfx.canvas.accelerated.cache-items" = 4096;

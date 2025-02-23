@@ -1,24 +1,18 @@
 * {
   border: none;
   border-radius: 0;
-  padding: 0;
-  margin: 0;
-  font-size: 11px;
+  font-size: 18px;
+  font-family: "EnvyCodeR Nerd Font";
+  margin: 0px;
 }
 
 window#waybar {
   background: #292828;
-  color: #ffffff;
 }
 
 #workspaces button {
-  margin-right: 10px;
-  color: #ffffff;
-}
-#workspaces button:hover, #workspaces button:active {
-  background-color: #292828;
-  color: #ffffff;
+  padding: 2px 8px;
 }
 #workspaces button.focused {
-  background-color: #383737;
+  background-color: #165f96;
 }

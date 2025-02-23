@@ -38,7 +38,11 @@ in {
           copyFileContents.enable = true;
           emoteCloner.enable = true;
           experiments.enable = true;
-          fakeNitro.enable = true;
+          fakeNitro = {
+            enable = true;
+            transformEmojis = false;
+            transformStickers = false;
+          };
           favoriteEmojiFirst.enable = true;
           favoriteGifSearch.enable = true;
           fixYoutubeEmbeds.enable = true;
@@ -67,6 +71,7 @@ in {
           replyTimestamp.enable = true;
           serverInfo.enable = true;
           spotifyCrack.enable = true;
+          webScreenShareFixes.enable = true;
           youtubeAdblock.enable = true;
         };
       };

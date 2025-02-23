@@ -1,19 +1,16 @@
 {
   pkgs,
   flake,
+  lib,
   ...
 }: {
-  # imports = let
-  #   nixos-hardware-modules = with flake.inputs.nixos-hardware.nixosModules; [
-  #     common-cpu-amd
-  #     common-gpu-amd
-  #   ];
-  # in
-  #   [
-  #     ./hardware-configuration.nix
-  #   ]
-  #   ++ nixos-hardware-modules;
-  imports = [./hardware-configuration.nix];
+  imports = let
+    nixos-hardware = flake.inputs.nixos-hardware.nixosModules;
+  in [
+    ./hardware-configuration.nix
+    nixos-hardware.common-cpu-amd
+    nixos-hardware.common-gpu-amd
+  ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -27,7 +24,9 @@
   security.rtkit.enable = true;
   security.polkit.enable = true;
 
-  hardware.graphics.enable = true;
+  hardware = {
+    bluetooth.enable = true;
+  };
 
   services.pipewire = {
     enable = true;
@@ -35,6 +34,7 @@
     alsa.support32Bit = true;
     pulse.enable = true;
   };
+  services.displayManager.enable = true;
 
   users.users.joe = {
     isNormalUser = true;
@@ -47,6 +47,19 @@
       gh
       bitwarden-desktop
     ];
+  };
+
+  programs = {
+    dconf.enable = true;
+    uwsm = {
+      enable = true;
+      waylandCompositors = {
+        sway = {
+          prettyName = "Sway";
+          binPath = lib.getExe pkgs.sway;
+        };
+      };
+    };
   };
 
   home-manager.users.joe = {...}: {
@@ -75,5 +88,22 @@
     home.packages = with pkgs; [
       rubik
     ];
+
+    gtk = {
+      enable = true;
+      theme = {
+        name = "Adwaita-dark";
+        package = pkgs.gnome-themes-extra;
+      };
+    };
+
+    qt = {
+      enable = true;
+      platformTheme.name = "adwaita";
+      style = {
+        name = "adwaita-dark";
+        package = pkgs.adwaita-qt;
+      };
+    };
   };
 }
