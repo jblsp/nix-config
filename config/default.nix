@@ -7,13 +7,6 @@
   ...
 }: {
   imports = [
-    # make os modules available
-    ../modules/os
-
-    # flake inputs modules
-    flake.inputs.home-manager.nixosModules.home-manager
-
-    # configuration
     ./home-manager.nix
   ];
 

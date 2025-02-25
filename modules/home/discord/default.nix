@@ -27,14 +27,22 @@ in {
           else false;
       };
       config = {
-        frameless = true;
+        themeLinks = [
+          "https://raw.githack.com/GeopJr/DNOME/dist/DNOME.css"
+        ];
         plugins = {
           accountPanelServerProfile.enable = true;
           alwaysTrust.enable = true;
           betterGifPicker.enable = true;
+          betterSettings = {
+            enable = true;
+            disableFade = false;
+          };
+          biggerStreamPreview.enable = true;
           blurNSFW.enable = true;
           callTimer.enable = true;
           clearURLs.enable = true;
+          colorSighted.enable = true;
           copyFileContents.enable = true;
           emoteCloner.enable = true;
           experiments.enable = true;
@@ -49,6 +57,8 @@ in {
           forceOwnerCrown.enable = true;
           friendsSince.enable = true;
           fullSearchContext.enable = true;
+          gifPaste.enable = true;
+          imageZoom.enable = true;
           keepCurrentChannel.enable = true;
           memberCount = {
             enable = true;
@@ -57,6 +67,8 @@ in {
           mentionAvatars.enable = true;
           messageLinkEmbeds.enable = true;
           messageLogger.enable = true;
+          moreCommands.enable = true;
+          moreKaomoji.enable = true;
           mutualGroupDMs.enable = true;
           newGuildSettings = {
             enable = true;
@@ -66,11 +78,18 @@ in {
           noOnboardingDelay.enable = true;
           noPendingCount.enable = true;
           noTypingAnimation.enable = true;
+          noUnblockToJump.enable = true;
           openInApp.enable = true;
+          pinDMs.enable = true;
           previewMessage.enable = true;
           replyTimestamp.enable = true;
           serverInfo.enable = true;
           spotifyCrack.enable = true;
+          summaries.enable = true;
+          unsuppressEmbeds.enable = true;
+          validReply.enable = true;
+          validUser.enable = true;
+          volumeBooster.enable = true;
           webScreenShareFixes.enable = true;
           youtubeAdblock.enable = true;
         };

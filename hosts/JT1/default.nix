@@ -34,18 +34,17 @@
     alsa.support32Bit = true;
     pulse.enable = true;
   };
-  services.displayManager.enable = true;
 
   users.users.joe = {
     isNormalUser = true;
     description = "Joe";
     extraGroups = ["networkmanager" "wheel"];
     packages = with pkgs; [
-      kitty
-      hyprpolkitagent
-      wl-clipboard
-      gh
       bitwarden-desktop
+      obs-studio
+      libreoffice-qt6-fresh
+      networkmanagerapplet
+      vial
     ];
   };
 

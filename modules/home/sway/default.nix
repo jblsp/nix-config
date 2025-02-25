@@ -12,6 +12,7 @@ in {
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
       swaybg
+      wl-clipboard
     ];
     xdg.portal = {
       enable = true;
@@ -26,8 +27,8 @@ in {
     };
     wayland.windowManager.sway = {
       enable = true;
+      systemd.enable = false;
       checkConfig = false;
-      wrapperFeatures.base = false;
       config = {
         modifier = "Mod4";
         terminal = "ghostty";
@@ -43,10 +44,22 @@ in {
         window = {
           titlebar = false;
           border = 3;
+          commands = [
+            {
+              criteria.shell = "xwayland";
+              command = "title_format \"%title [XWayland]\"";
+            }
+          ];
         };
         floating = {
           border = 3;
           titlebar = false;
+          criteria = [
+            {window_role = "pop-up";}
+            {window_role = "bubble";}
+            {window_role = "dialog";}
+            {app_id = "nm-connection-editor";}
+          ];
         };
         output = {
           DP-2 = {
@@ -58,57 +71,58 @@ in {
         };
         keybindings = let
           swaycfg = config.wayland.windowManager.sway.config;
+          mod = swaycfg.modifier;
         in {
-          "${swaycfg.modifier}+w" = "kill";
-          "${swaycfg.modifier}+Space" = "exec ${swaycfg.menu}";
+          "${mod}+w" = "kill";
+          "${mod}+Return" = "exec ${swaycfg.menu}";
 
-          "${swaycfg.modifier}+${swaycfg.left}" = "focus left";
-          "${swaycfg.modifier}+${swaycfg.down}" = "focus down";
-          "${swaycfg.modifier}+${swaycfg.up}" = "focus up";
-          "${swaycfg.modifier}+${swaycfg.right}" = "focus right";
+          "${mod}+${swaycfg.left}" = "focus left";
+          "${mod}+${swaycfg.down}" = "focus down";
+          "${mod}+${swaycfg.up}" = "focus up";
+          "${mod}+${swaycfg.right}" = "focus right";
 
-          "${swaycfg.modifier}+Shift+${swaycfg.left}" = "move left";
-          "${swaycfg.modifier}+Shift+${swaycfg.down}" = "move down";
-          "${swaycfg.modifier}+Shift+${swaycfg.up}" = "move up";
-          "${swaycfg.modifier}+Shift+${swaycfg.right}" = "move right";
+          "${mod}+Shift+${swaycfg.left}" = "move left";
+          "${mod}+Shift+${swaycfg.down}" = "move down";
+          "${mod}+Shift+${swaycfg.up}" = "move up";
+          "${mod}+Shift+${swaycfg.right}" = "move right";
 
-          "${swaycfg.modifier}+b" = "splith";
-          "${swaycfg.modifier}+v" = "splitv";
-          "${swaycfg.modifier}+shift+f" = "fullscreen toggle";
-          "${swaycfg.modifier}+a" = "focus parent";
+          "${mod}+b" = "splith";
+          "${mod}+v" = "splitv";
+          "${mod}+shift+f" = "fullscreen toggle";
+          "${mod}+a" = "focus parent";
 
-          "${swaycfg.modifier}+t" = "layout tabbed";
-          "${swaycfg.modifier}+s" = "layout toggle split";
+          "${mod}+t" = "layout tabbed";
+          "${mod}+s" = "layout toggle split";
 
-          "${swaycfg.modifier}+f" = "floating toggle";
-          "${swaycfg.modifier}+m" = "focus mode_toggle";
+          "${mod}+f" = "floating toggle";
+          "${mod}+m" = "focus mode_toggle";
 
-          "${swaycfg.modifier}+Shift+c" = "reload";
-          "${swaycfg.modifier}+Shift+q" = "exec swaymsg exit";
+          "${mod}+Shift+c" = "reload";
+          "${mod}+Shift+q" = "exec swaymsg exit";
 
-          "${swaycfg.modifier}+r" = "mode resize";
+          "${mod}+r" = "mode resize";
 
-          "${swaycfg.modifier}+1" = "workspace number 1";
-          "${swaycfg.modifier}+2" = "workspace number 2";
-          "${swaycfg.modifier}+3" = "workspace number 3";
-          "${swaycfg.modifier}+4" = "workspace number 4";
-          "${swaycfg.modifier}+5" = "workspace number 5";
-          "${swaycfg.modifier}+6" = "workspace number 6";
-          "${swaycfg.modifier}+7" = "workspace number 7";
-          "${swaycfg.modifier}+8" = "workspace number 8";
-          "${swaycfg.modifier}+9" = "workspace number 9";
-          "${swaycfg.modifier}+0" = "workspace number 0";
+          "${mod}+1" = "workspace number 1";
+          "${mod}+2" = "workspace number 2";
+          "${mod}+3" = "workspace number 3";
+          "${mod}+4" = "workspace number 4";
+          "${mod}+5" = "workspace number 5";
+          "${mod}+6" = "workspace number 6";
+          "${mod}+7" = "workspace number 7";
+          "${mod}+8" = "workspace number 8";
+          "${mod}+9" = "workspace number 9";
+          "${mod}+0" = "workspace number 0";
 
-          "${swaycfg.modifier}+Shift+1" = "move container to workspace number 1";
-          "${swaycfg.modifier}+Shift+2" = "move container to workspace number 2";
-          "${swaycfg.modifier}+Shift+3" = "move container to workspace number 3";
-          "${swaycfg.modifier}+Shift+4" = "move container to workspace number 4";
-          "${swaycfg.modifier}+Shift+5" = "move container to workspace number 5";
-          "${swaycfg.modifier}+Shift+6" = "move container to workspace number 6";
-          "${swaycfg.modifier}+Shift+7" = "move container to workspace number 7";
-          "${swaycfg.modifier}+Shift+8" = "move container to workspace number 8";
-          "${swaycfg.modifier}+Shift+9" = "move container to workspace number 9";
-          "${swaycfg.modifier}+Shift+0" = "move container to workspace number 0";
+          "${mod}+Shift+1" = "move container to workspace number 1";
+          "${mod}+Shift+2" = "move container to workspace number 2";
+          "${mod}+Shift+3" = "move container to workspace number 3";
+          "${mod}+Shift+4" = "move container to workspace number 4";
+          "${mod}+Shift+5" = "move container to workspace number 5";
+          "${mod}+Shift+6" = "move container to workspace number 6";
+          "${mod}+Shift+7" = "move container to workspace number 7";
+          "${mod}+Shift+8" = "move container to workspace number 8";
+          "${mod}+Shift+9" = "move container to workspace number 9";
+          "${mod}+Shift+0" = "move container to workspace number 0";
 
           # Brightness
           "XF86MonBrightnessDown" = "exec light -U 10";

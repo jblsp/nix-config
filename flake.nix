@@ -20,11 +20,10 @@
 
   outputs = {
     self,
-    nixpkgs,
     ...
   }: {
     nixosConfigurations = {
-      "JT490S" = nixpkgs.lib.nixosSystem {
+      "JT490S" = self.inputs.nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {
           flake = self;
@@ -33,11 +32,15 @@
           ./config
           ./hosts/JT490S
           {
+            imports = [
+              ./modules/os
+              self.inputs.home-manager.nixosModules.home-manager
+            ];
             networking.hostName = "JT490S";
           }
         ];
       };
-      "JT1" = nixpkgs.lib.nixosSystem {
+      "JT1" = self.inputs.nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {
           flake = self;
@@ -46,6 +49,10 @@
           ./config
           ./hosts/JT1
           {
+            imports = [
+              ./modules/os
+              self.inputs.home-manager.nixosModules.home-manager
+            ];
             networking.hostName = "JT1";
           }
         ];
