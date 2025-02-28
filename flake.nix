@@ -18,22 +18,22 @@
     };
   };
 
-  outputs = {
-    self,
-    ...
-  }: {
+  outputs = {self, ...}: let
+    mylib = (import ./lib self.inputs.nixpkgs.lib);
+  in {
     nixosConfigurations = {
       "JT490S" = self.inputs.nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {
+          inherit mylib;
           flake = self;
         };
         modules = [
-          ./config
+          ./core
           ./hosts/JT490S
           {
             imports = [
-              ./modules/os
+              ./modules
               self.inputs.home-manager.nixosModules.home-manager
             ];
             networking.hostName = "JT490S";
@@ -43,14 +43,15 @@
       "JT1" = self.inputs.nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {
+          inherit mylib;
           flake = self;
         };
         modules = [
-          ./config
+          ./core
           ./hosts/JT1
           {
             imports = [
-              ./modules/os
+              ./modules
               self.inputs.home-manager.nixosModules.home-manager
             ];
             networking.hostName = "JT1";

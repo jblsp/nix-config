@@ -6,10 +6,6 @@
   flake,
   ...
 }: {
-  imports = [
-    ./home-manager.nix
-  ];
-
   nix = {
     settings = {
       experimental-features = "nix-command flakes";
@@ -36,6 +32,24 @@
 
   i18n.defaultLocale = lib.mkDefault "en_US.UTF-8";
   time.timeZone = lib.mkDefault "America/New_York";
+
+  # users.mutableUsers = lib.mkDefault false;
+
+  home-manager = let
+    globalHome = {...}: {
+      programs.home-manager.enable = true;
+      home.stateVersion = lib.mkDefault "25.05";
+    };
+  in {
+    useGlobalPkgs = lib.mkDefault true;
+    useUserPackages = lib.mkDefault true;
+    extraSpecialArgs = {inherit flake;};
+    backupFileExtension = "backup";
+    sharedModules = [
+      ../modules/home # make modules available
+      globalHome
+    ];
+  };
 
   system = {
     nixos.label = "GitRev.${config.system.configurationRevision}.Rel.${config.system.nixos.release}"; # Tag each generation with Git hash

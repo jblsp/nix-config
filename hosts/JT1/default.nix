@@ -50,15 +50,11 @@
 
   programs = {
     dconf.enable = true;
-    uwsm = {
-      enable = true;
-      waylandCompositors = {
-        sway = {
-          prettyName = "Sway";
-          binPath = lib.getExe pkgs.sway;
-        };
-      };
-    };
+  };
+
+  modules = {
+    defaultUsers = ["joe"];
+    git.enable = true;
   };
 
   home-manager.users.joe = {...}: {
@@ -66,7 +62,6 @@
       discord.enable = true;
       firefox.enable = true;
       ghostty.enable = true;
-      git.enable = true;
       neovim.enable = true;
       sway.enable = true;
       waybar.enable = true;

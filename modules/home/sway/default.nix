@@ -27,7 +27,6 @@ in {
     };
     wayland.windowManager.sway = {
       enable = true;
-      systemd.enable = false;
       checkConfig = false;
       config = {
         modifier = "Mod4";
