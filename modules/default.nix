@@ -1,15 +1,14 @@
 {lib, ...}: {
   imports = [
-    # ./bash
-    # ./discord
-    # ./firefox
-    # ./ghostty
+    ./bash
+    ./discord
+    ./firefox
+    ./ghostty
     ./git
-    # ./neovim
-    # ./ssh
-    # ./sway
-    # ./waybar
-    # ./wofi
+    ./neovim
+    ./ssh
+    ./sway
+    ./waybar
   ];
 
   options.modules = {

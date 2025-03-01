@@ -55,21 +55,18 @@
   modules = {
     defaultUsers = ["joe"];
     git.enable = true;
+    discord.enable = true;
+    firefox.enable = true;
+    ghostty.enable = true;
+    neovim.enable = true;
+    sway.enable = true;
+    waybar.enable = true;
+    ssh.enable = true;
+    bash.enable = true;
   };
 
   home-manager.users.joe = {...}: {
-    modules = {
-      discord.enable = true;
-      firefox.enable = true;
-      ghostty.enable = true;
-      neovim.enable = true;
-      sway.enable = true;
-      waybar.enable = true;
-      ssh.enable = true;
-      bash.enable = true;
-      wofi.enable = true;
-    };
-
+    programs.wofi.enable = true;
     fonts.fontconfig = {
       enable = true;
       defaultFonts = {

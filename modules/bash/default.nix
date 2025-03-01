@@ -1,15 +1,10 @@
 {
-  lib,
+  mylib,
   config,
   ...
-}: let
-  cfg = config.modules.bash;
-in {
-  options.modules.bash = {
-    enable = lib.mkEnableOption "Enable bash";
-  };
-
-  config = lib.mkIf cfg.enable {
+}:
+mylib.mkModule config "bash" {
+  homeConfig = {
     programs.bash = {
       enable = true;
       # bashrcExtra = ''

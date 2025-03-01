@@ -1,17 +1,11 @@
 {
-  lib,
+  mylib,
   config,
   pkgs,
-  flake,
   ...
-}: let
-  cfg = config.modules.neovim;
-in {
-  options.modules.neovim = {
-    enable = lib.mkEnableOption "Enable neovim";
-  };
-
-  config = lib.mkIf cfg.enable {
+}:
+mylib.mkModule config "neovim" {
+  homeConfig = {
     programs.neovim = {
       enable = true;
       extraPackages = with pkgs; [

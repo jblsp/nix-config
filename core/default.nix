@@ -46,13 +46,12 @@
     extraSpecialArgs = {inherit flake;};
     backupFileExtension = "backup";
     sharedModules = [
-      ../modules/home # make modules available
       globalHome
     ];
   };
 
   system = {
-    nixos.label = "GitRev.${config.system.configurationRevision}.Rel.${config.system.nixos.release}"; # Tag each generation with Git hash
+    nixos.label = "GitRev.${config.system.configurationRevision}.Rel.${config.system.nixos.release}";
     configurationRevision = flake.rev or flake.dirtyRev or null;
     stateVersion = lib.mkDefault "25.05";
   };

@@ -1,15 +1,11 @@
 {
-  lib,
+  mylib,
   config,
   pkgs,
   ...
-}: let
-  cfg = config.modules.sway;
-in {
-  options.modules.sway = {
-    enable = lib.mkEnableOption "Enables sway";
-  };
-  config = lib.mkIf cfg.enable {
+}:
+mylib.mkModule config "sway" {
+  homeConfig = {homeConfig}: {
     home.packages = with pkgs; [
       swaybg
       wl-clipboard
@@ -62,14 +58,16 @@ in {
         };
         output = {
           DP-2 = {
-            bg = "${config.home.homeDirectory}/Pictures/wallpapers/wallhaven-qd1qj7_2560x1440.png fill";
+            # bg = "${config.home.homeDirectory}/Pictures/wallpapers/wallhaven-qd1qj7_2560x1440.png fill";
           };
         };
         gaps = {
           smartBorders = "no_gaps";
         };
         keybindings = let
-          swaycfg = config.wayland.windowManager.sway.config;
+          # config.home-mananger.users.user.wayland.windowManager.sway.config;
+          # homeConfig.wayland.windowManager.sway.config;
+          swaycfg = homeConfig.wayland.windowManager.sway.config;
           mod = swaycfg.modifier;
         in {
           "${mod}+w" = "kill";
@@ -97,7 +95,7 @@ in {
           "${mod}+m" = "focus mode_toggle";
 
           "${mod}+Shift+c" = "reload";
-          "${mod}+Shift+q" = "exec swaymsg exit";
+          "${mod}+Shift+e" = "exec swaymsg exit";
 
           "${mod}+r" = "mode resize";
 

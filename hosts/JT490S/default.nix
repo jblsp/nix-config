@@ -64,7 +64,6 @@
   };
 
   programs = {
-    zsh.enable = true;
     light.enable = true;
   };
 
@@ -81,21 +80,22 @@
     isNormalUser = true;
     description = "Joe Sparma";
     extraGroups = ["networkmanager" "wheel" "video"];
-    shell = pkgs.zsh;
   };
 
-  home-manager.users.joe = {...}: {
-    modules = {
-      discord.enable = true;
-      firefox.enable = true;
-      ghostty.enable = true;
-      git.enable = true;
-      neovim.enable = true;
-      sway.enable = true;
-      waybar.enable = true;
-      zsh.enable = true;
-    };
+  modules = {
+    defaultUsers = ["joe"];
 
+    discord.enable = true;
+    firefox.enable = true;
+    ghostty.enable = true;
+    git.enable = true;
+    neovim.enable = true;
+    sway.enable = true;
+    waybar.enable = true;
+    bash.enable = true;
+  };
+  home-manager.users.joe = {...}: {
+    programs.wofi.enable = true;
     programs.gh.enable = true;
   };
 }

@@ -1,15 +1,10 @@
 {
   config,
-  lib,
+  mylib,
   ...
-}: let
-  cfg = config.modules.ssh;
-in {
-  options.modules.ssh = {
-    enable = lib.mkEnableOption "Enable ssh configuration";
-  };
-
-  config = lib.mkIf cfg.enable {
+}:
+mylib.mkModule config "ssh" {
+  homeConfig = {
     services.ssh-agent.enable = true;
     programs.ssh = {
       enable = true;

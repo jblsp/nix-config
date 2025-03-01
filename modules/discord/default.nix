@@ -1,31 +1,18 @@
 {
-  lib,
+  mylib,
   config,
   flake,
   ...
-}: let
-  cfg = config.modules.discord;
-in {
-  imports = [
-    flake.inputs.nixcord.homeManagerModules.nixcord
-  ];
-
-  options.modules.discord = {
-    enable = lib.mkEnableOption "Enable discord";
-  };
-
-  config = lib.mkIf cfg.enable {
+}:
+mylib.mkModule config "discord" {
+  homeImports = [flake.inputs.nixcord.homeManagerModules.nixcord];
+  homeConfig = {
     programs.nixcord = {
       enable = true;
       discord = {
         enable = false;
       };
-      vesktop = {
-        enable =
-          if cfg.enable
-          then true
-          else false;
-      };
+      vesktop.enable = true;
       config = {
         themeLinks = [
           "https://raw.githack.com/GeopJr/DNOME/dist/DNOME.css"

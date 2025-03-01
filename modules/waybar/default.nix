@@ -1,16 +1,11 @@
 {
-  lib,
+  mylib,
   config,
   pkgs,
   ...
-}: let
-  cfg = config.modules.waybar;
-in {
-  options.modules.waybar = {
-    enable = lib.mkEnableOption "Enable waybar";
-  };
-
-  config = lib.mkIf cfg.enable {
+}:
+mylib.mkModule config "waybar" {
+  homeConfig = {
     home.packages = with pkgs; [
       nerd-fonts.envy-code-r
     ];
