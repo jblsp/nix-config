@@ -48,10 +48,6 @@
     ];
   };
 
-  programs = {
-    dconf.enable = true;
-  };
-
   modules = {
     defaultUsers = ["joe"];
     git.enable = true;
@@ -63,6 +59,7 @@
     waybar.enable = true;
     shell.enable = true;
     ssh.enable = true;
+    theme.enable = true;
   };
 
   home-manager.users.joe = {...}: {
@@ -79,22 +76,5 @@
     home.packages = with pkgs; [
       rubik
     ];
-
-    gtk = {
-      enable = true;
-      theme = {
-        name = "Adwaita-dark";
-        package = pkgs.gnome-themes-extra;
-      };
-    };
-
-    qt = {
-      enable = true;
-      platformTheme.name = "adwaita";
-      style = {
-        name = "adwaita-dark";
-        package = pkgs.adwaita-qt;
-      };
-    };
   };
 }

@@ -9,6 +9,7 @@
     ./ssh
     ./steam
     ./sway
+    ./theme
     ./waybar
   ];
 

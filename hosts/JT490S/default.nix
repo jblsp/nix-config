@@ -85,6 +85,7 @@
     waybar.enable = true;
     shell.enable = true;
     steam.enable = true;
+    theme.enable = true;
   };
 
   home-manager.users.joe = {...}: {

@@ -6,7 +6,7 @@
 }:
 mylib.mkModule config "firefox" {
   homeConfig = {
-    programs.firefox = {
+    programs.librewolf = {
       enable = true;
       profiles = {
         "joe" = {
@@ -106,65 +106,6 @@ mylib.mkModule config "firefox" {
             "sidebar.revamp" = true;
             "sidebar.verticalTabs" = true;
 
-            # URL Bar
-            "browser.urlbar.suggest.history" = false;
-            "browser.urlbar.suggest.bookmark" = true;
-            "browser.urlbar.suggest.clipboard" = false;
-            "browser.urlbar.suggest.openpage" = false;
-            "browser.urlbar.suggest.engines" = false;
-            "browser.urlbar.suggest.searches" = false;
-            "browser.urlbar.quickactions.enabled" = false;
-            "browser.urlbar.shortcuts.quickactions" = false;
-            "browser.urlbar.suggest.weather" = true;
-            "browser.urlbar.weather.ignoreVPN" = false;
-            "browser.urlbar.suggest.calculator" = true;
-            "browser.urlbar.unitConversion.enabled" = true;
-            "browser.urlbar.trending.featureGate" = false;
-            "browser.urlbar.suggest.trending" = false;
-            "browser.urlbar.recentsearches.featureGate" = false;
-
-            # New Tab Page
-            "browser.newtabpage.activity-stream.discoverystream.enabled" = false;
-            "browser.newtabpage.activity-stream.showSearch" = true;
-            "browser.newtabpage.activity-stream.feeds.topsites" = false;
-            "browser.newtabpage.activity-stream.showSponsoredTopSites" = false;
-            "browser.newtabpage.activity-stream.showWeather" = false;
-            "browser.newtabpage.activity-stream.system.showWeather" = false;
-            "browser.newtabpage.activity-stream.feeds.section.topstories" = false;
-            "browser.newtabpage.activity-stream.showSponsored" = false;
-            "browser.newtabpage.activity-stream.feeds.section.highlights" = false;
-            "browser.newtabpage.activity-stream.section.highlights.includeBookmarks" = false;
-            "browser.newtabpage.activity-stream.section.highlights.includeDownloads" = false;
-            "browser.newtabpage.activity-stream.section.highlights.includePocket" = false;
-            "browser.newtabpage.activity-stream.section.highlights.includeVisited" = false;
-            "browser.newtabpage.activity-stream.feeds.snippets" = false;
-
-            # Disable some warnings and popups
-            "browser.aboutConfig.showWarning" = false;
-            "browser.aboutwelcome.enabled" = false;
-            "full-screen-api.warning.delay" = -1;
-            "full-screen-api.warning.timeout" = 0;
-
-            # Disable addon recommendations
-            "extensions.getAddons.showPane" = false;
-            "extensions.htmlaboutaddons.recommendations.enabled" = false;
-            "browser.discovery.enabled" = false;
-            "browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons" = false;
-            "browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features" = false;
-
-            # Disable asking to set as default
-            "browser.shell.checkDefaultBrowser" = false;
-
-            # Disable pocket + morefrommozilla
-            "extensions.pocket.enabled" = false;
-            "browser.preferences.moreFromMozilla" = false;
-
-            # Enable stylesheets
-            "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
-
-            # Prefer system colorschemes
-            "layout.css.prefers-color-scheme.content-override" = 2;
-
             # reject cookie banners if one-click option
             "cookiebanners.service.mode" = 1;
             "cookiebanners.service.mode.privateBrowsing" = 1;
@@ -173,21 +114,35 @@ mylib.mkModule config "firefox" {
             "full-screen-api.transition-duration.enter" = "0 0";
             "full-screen-api.transition-duration.leave" = "0 0";
 
-            # Show "View Image Info" on right-click
-            "browser.menu.showViewImageInfo" = true;
-
             # Show all matches in find
             "findbar.highlightAll" = true;
 
-            # Disable password manager/generator
-            "signon.rememberSignons" = false;
-            "signon.generation.enabled" = false;
-
-            # Disable firefox relay
-            "signon.firefoxRelay.feature" = "";
-
             # Tabs
             "browser.tabs.closeWindowWithLastTab" = false;
+
+            # allow fingerprinting/webgl
+            "privacy.resistFingerprinting" = false;
+            "webgl.disabled" = false;
+
+            # disable some clearonshutdown options
+            "privacy.clearOnShutdown.history" = false;
+            "privacy.clearOnShutdown.downloads" = false;
+            "privacy.clearOnShutdown.cookies" = false;
+
+            # use autoscroll instead of paste on middle click
+            "middlemouse.paste" = false;
+            "general.autoScroll" = true;
+
+            # firefox sync
+            "identity.fxaccounts.enabled" = true;
+            "services.sync.engine.addons" = false;
+            "services.sync.engine.addresses" = false;
+            "services.sync.engine.bookmarks" = true;
+            "services.sync.engine.creditcards" = false;
+            "services.sync.engine.history" = false;
+            "services.sync.engine.passwords" = false;
+            "services.sync.engine.prefs" = false;
+            "services.sync.engine.tabs" = false;
 
             # Fastfox 133.0 (https://github.com/yokoffing/Betterfox/blob/main/Fastfox.js)
             "content.notify.interval" = 100000;
@@ -213,71 +168,6 @@ mylib.mkModule config "firefox" {
             "network.predictor.enabled" = false;
             "layout.css.grid-template-masonry-value.enabled" = true;
             "dom.enable_web_task_scheduling" = true;
-
-            # Securefox 133.0 (https://github.com/yokoffing/Betterfox/blob/main/Securefox.js)
-            "browser.contentblocking.category" = "strict";
-            "urlclassifier.trackingSkipURLs" = "*.reddit.com, *.twitter.com, *.twimg.com, *.tiktok.com";
-            "urlclassifier.features.socialtracking.skipURLs" = "*.instagram.com, *.twitter.com, *.twimg.com";
-            "browser.download.start_downloads_in_tmp_dir" = true;
-            "browser.helperApps.deleteTempFileOnExit" = true;
-            "browser.uitour.enabled" = false;
-            "privacy.globalprivacycontrol.enabled" = true;
-            "security.OCSP.enabled" = 0;
-            "security.remote_settings.crlite_filters.enabled" = true;
-            "security.pki.crlite_mode" = 2;
-            "security.ssl.treat_unsafe_negotiation_as_broken" = true;
-            "browser.xul.error_pages.expert_bad_cert" = true;
-            "security.tls.enable_0rtt_data" = false;
-            "browser.privatebrowsing.forceMediaMemoryCache" = true;
-            "browser.sessionstore.interval" = 60000;
-            "browser.privatebrowsing.resetPBM.enabled" = true;
-            "privacy.history.custom" = true;
-            "browser.urlbar.untrimOnUserInteraction.featureGate" = true;
-            "security.insecure_connection_text.enabled" = true;
-            "security.insecure_connection_text.pbmode.enabled" = true;
-            "browser.urlbar.update2.engineAliasRefresh" = true;
-            "browser.search.suggest.enabled" = false;
-            "browser.urlbar.quicksuggest.enabled" = false;
-            "browser.urlbar.groupLabels.enabled" = false;
-            "browser.formfill.enable" = false;
-            "network.IDN_show_punycode" = true;
-            "dom.security.https_first" = true;
-            "signon.formlessCapture.enabled" = false;
-            "signon.privateBrowsingCapture.enabled" = false;
-            "network.auth.subresource-http-auth-allow" = 1;
-            "editor.truncate_user_pastes" = false;
-            "security.mixed_content.block_display_content" = true;
-            "pdfjs.enableScripting" = false;
-            "extensions.enabledScopes" = 5;
-            "network.http.referer.XOriginTrimmingPolicy" = 2;
-            "privacy.userContext.ui.enabled" = true;
-            "browser.safebrowsing.downloads.remote.enabled" = false;
-            "permissions.default.desktop-notification" = 2;
-            "browser.search.update" = false;
-            "permissions.manager.defaultsUrl" = "";
-            "datareporting.policy.dataSubmissionEnabled" = false;
-            "datareporting.healthreport.uploadEnabled" = false;
-            "toolkit.telemetry.unified" = false;
-            "toolkit.telemetry.enabled" = false;
-            "toolkit.telemetry.server" = "data:,";
-            "toolkit.telemetry.archive.enabled" = false;
-            "toolkit.telemetry.newProfilePing.enabled" = false;
-            "toolkit.telemetry.shutdownPingSender.enabled" = false;
-            "toolkit.telemetry.updatePing.enabled" = false;
-            "toolkit.telemetry.bhrPing.enabled" = false;
-            "toolkit.telemetry.firstShutdownPing.enabled" = false;
-            "toolkit.telemetry.coverage.opt-out" = true;
-            "toolkit.coverage.opt-out" = true;
-            "toolkit.coverage.endpoint.base" = "";
-            "browser.newtabpage.activity-stream.feeds.telemetry" = false;
-            "browser.newtabpage.activity-stream.telemetry" = false;
-            "app.shield.optoutstudies.enabled" = false;
-            "app.normandy.enabled" = false;
-            "app.normandy.api_url" = "";
-            "breakpad.reportURL" = "";
-            "browser.tabs.crashReporting.sendReport" = false;
-            "captivedetect.canonicalURL" = "";
-            "network.captive-portal-service.enabled" = false;
           };
         };
       };
