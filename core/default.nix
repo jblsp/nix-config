@@ -8,6 +8,13 @@
 }: {
   nix = {
     settings = {
+      substituters = [
+        "https://nix-community.cachix.org"
+        "https://cache.nixos.org/"
+      ];
+      trusted-public-keys = [
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      ];
       experimental-features = "nix-command flakes";
     };
     optimise.automatic = lib.mkDefault true;
@@ -52,7 +59,7 @@
 
   system = {
     nixos.label = "GitRev.${config.system.configurationRevision}.Rel.${config.system.nixos.release}";
-    configurationRevision = flake.rev or flake.dirtyRev or null;
+    configurationRevision = flake.shortRev or flake.dirtyRev;
     stateVersion = lib.mkDefault "25.05";
   };
 }

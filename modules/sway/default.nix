@@ -54,6 +54,16 @@ mylib.mkModule config "sway" {
             {window_role = "bubble";}
             {window_role = "dialog";}
             {app_id = "nm-connection-editor";}
+            {app_id = "io.github.kaii_lb.Overskride";}
+            {app_id = "overskride";}
+            {
+              title = "Friends List";
+              class = "steam";
+            }
+            {
+              title = "Steam Settings";
+              class = "steam";
+            }
           ];
         };
         output = {

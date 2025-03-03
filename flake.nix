@@ -18,46 +18,51 @@
     };
   };
 
-  outputs = {self, ...}: let
-    mylib = (import ./lib self.inputs.nixpkgs.lib);
+  outputs = {
+    self,
+    nixpkgs,
+    ...
+  }: let
+    mylib = import ./lib nixpkgs.lib;
+    mkConfigs = specs:
+      builtins.listToAttrs (builtins.map ({
+          hostname,
+          system,
+          label ? hostname,
+        }: {
+          name = label;
+          value = nixpkgs.lib.nixosSystem {
+            inherit system;
+
+            specialArgs = {
+              inherit mylib;
+              flake = self;
+            };
+
+            modules = [
+              ./core
+              ./hosts/${hostname}
+              {
+                imports = [
+                  ./modules
+                  self.inputs.home-manager.nixosModules.home-manager
+                ];
+                networking.hostName = "${hostname}";
+              }
+            ];
+          };
+        })
+        specs);
   in {
-    nixosConfigurations = {
-      "JT490S" = self.inputs.nixpkgs.lib.nixosSystem {
+    nixosConfigurations = mkConfigs [
+      {
+        hostname = "JT490S";
         system = "x86_64-linux";
-        specialArgs = {
-          inherit mylib;
-          flake = self;
-        };
-        modules = [
-          ./core
-          ./hosts/JT490S
-          {
-            imports = [
-              ./modules
-              self.inputs.home-manager.nixosModules.home-manager
-            ];
-            networking.hostName = "JT490S";
-          }
-        ];
-      };
-      "JT1" = self.inputs.nixpkgs.lib.nixosSystem {
+      }
+      {
+        hostname = "JT1";
         system = "x86_64-linux";
-        specialArgs = {
-          inherit mylib;
-          flake = self;
-        };
-        modules = [
-          ./core
-          ./hosts/JT1
-          {
-            imports = [
-              ./modules
-              self.inputs.home-manager.nixosModules.home-manager
-            ];
-            networking.hostName = "JT1";
-          }
-        ];
-      };
-    };
+      }
+    ];
   };
 }

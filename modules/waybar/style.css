@@ -4,6 +4,7 @@
   font-size: 18px;
   font-family: "EnvyCodeR Nerd Font";
   margin: 0px;
+  color: #f7f7f7;
 }
 
 window#waybar {
@@ -15,4 +16,9 @@ window#waybar {
 }
 #workspaces button.focused {
   background-color: #165f96;
+}
+
+#workspaces button:hover {
+  box-shadow: inherit;
+  text-shadow: inherit;
 }

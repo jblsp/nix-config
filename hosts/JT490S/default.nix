@@ -67,15 +67,6 @@
     light.enable = true;
   };
 
-  environment.systemPackages = with pkgs; [
-    wl-clipboard
-    chromium
-    fastfetch
-    wezterm
-    overskride
-    nodejs_22
-  ];
-
   users.users.joe = {
     isNormalUser = true;
     description = "Joe Sparma";
@@ -92,10 +83,23 @@
     neovim.enable = true;
     sway.enable = true;
     waybar.enable = true;
-    bash.enable = true;
+    shell.enable = true;
+    steam.enable = true;
   };
+
   home-manager.users.joe = {...}: {
     programs.wofi.enable = true;
     programs.gh.enable = true;
+    home.packages = with pkgs; [
+      fastfetch
+      overskride
+      nodejs_22
+      bitwarden-desktop
+      obs-studio
+      libreoffice-qt6-fresh
+      networkmanagerapplet
+      xfce.thunar
+      redshift
+    ];
   };
 }

@@ -1,12 +1,13 @@
 {lib, ...}: {
   imports = [
-    ./bash
+    ./shell
     ./discord
     ./firefox
     ./ghostty
     ./git
     ./neovim
     ./ssh
+    ./steam
     ./sway
     ./waybar
   ];

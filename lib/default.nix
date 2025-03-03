@@ -1,19 +1,4 @@
 lib: {
-  # multiHmc = users: config: {
-  #   users = builtins.listToAttrs (builtins.map (user: {
-  #       name = user;
-  #       value = config;
-  #     })
-  #     users);
-  # };
-  #
-  # mkUsersOption = defaultUsers:
-  #   lib.mkOption {
-  #     type = lib.types.listOf lib.types.str;
-  #     default = defaultUsers;
-  #     description = "Users for the home-manager configuration to be applied to";
-  #   };
-
   mkModule = osConfig: name: {
     options ? {},
     config ? {},
@@ -29,7 +14,7 @@ lib: {
     options.modules."${name}" =
       options
       // {
-        enable = lib.mkEnableOption "Enable git";
+        enable = lib.mkEnableOption "the ${name} module";
         users = lib.mkOption {
           type = lib.types.listOf lib.types.str;
           default = osConfig.modules.defaultUsers;

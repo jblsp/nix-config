@@ -61,8 +61,8 @@
     neovim.enable = true;
     sway.enable = true;
     waybar.enable = true;
+    shell.enable = true;
     ssh.enable = true;
-    bash.enable = true;
   };
 
   home-manager.users.joe = {...}: {

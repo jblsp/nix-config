@@ -28,6 +28,7 @@ mylib.mkModule config "waybar" {
             "disk"
             "memory"
             "cpu"
+            "battery"
             "pulseaudio"
             "clock"
           ];
@@ -35,8 +36,8 @@ mylib.mkModule config "waybar" {
           "bluetooth" = {
             format-on = "󰂯 "; # no devices connected
             format-connected = "󰂯 {num_connections}";
-            format-off = ""; # controller is off
-            format-disabled = "󰂲 "; # controller is disabled
+            format-off = "󰂲 off"; # controller is off
+            format-disabled = "󰂲 disabled"; # controller is disabled
           };
           "network" = {
             format-wifi = "󰖩 {ipaddr}";
@@ -71,6 +72,11 @@ mylib.mkModule config "waybar" {
             states = {
               "critical" = 90;
             };
+          };
+          "battery" = {
+            tooltip = false;
+            format = "{icon} {capacity}%";
+            format-icons = [" " " " " " " " " "];
           };
           "clock" = {
             format = "{:%I:%M %p}";

@@ -7,6 +7,16 @@
 mylib.mkModule config "discord" {
   homeImports = [flake.inputs.nixcord.homeManagerModules.nixcord];
   homeConfig = {
+    home.file.".config/vesktop/settings.json" = {
+      force = true;
+      text = builtins.toJSON {
+        discordBranch = "stable";
+        minimizeToTray = false;
+        arRPC = false;
+        enableSplashScreen = false;
+      };
+    };
+
     programs.nixcord = {
       enable = true;
       discord = {
