@@ -14,11 +14,12 @@ mylib.mkModule config "firefox" {
           isDefault = true;
           extensions = {
             packages = with pkgs.nur.repos.rycee.firefox-addons; [
-              ublock-origin
-              bitwarden
               # bypass-paywalls-clean
+              bitwarden
+              darkreader
               return-youtube-dislikes
               sponsorblock
+              ublock-origin
             ];
           };
           search = {
