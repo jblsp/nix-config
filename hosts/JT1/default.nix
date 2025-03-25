@@ -41,25 +41,26 @@
     extraGroups = ["networkmanager" "wheel"];
     packages = with pkgs; [
       bitwarden-desktop
-      obs-studio
+      jdk
       libreoffice-qt6-fresh
       networkmanagerapplet
+      obs-studio
       vial
     ];
   };
 
   modules = {
     defaultUsers = ["joe"];
-    git.enable = true;
     discord.enable = true;
     firefox.enable = true;
     ghostty.enable = true;
+    git.enable = true;
     neovim.enable = true;
-    sway.enable = true;
-    waybar.enable = true;
+    plasma.enable = true;
     shell.enable = true;
     ssh.enable = true;
     theme.enable = true;
+    waybar.enable = true;
   };
 
   home-manager.users.joe = {...}: {

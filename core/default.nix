@@ -51,7 +51,7 @@
     useGlobalPkgs = lib.mkDefault true;
     useUserPackages = lib.mkDefault true;
     extraSpecialArgs = {inherit flake;};
-    backupFileExtension = "backup";
+    backupFileExtension = "hm-backup";
     sharedModules = [
       globalHome
     ];

@@ -24,74 +24,74 @@ mylib.mkModule config "firefox" {
           };
           search = {
             force = true;
-            default = "DuckDuckGo";
+            default = "ddg";
             engines = {
-              "Bing".metaData.hidden = true;
-              "Google".metaData.alias = "@g";
-              "Wikipedia (en)".metaData.alias = "@wp";
+              "bing".metaData.hidden = true;
+              "google".metaData.alias = "@g";
+              "wikipedia".metaData.alias = "@wp";
+              "youtube" = {
+                urls = [{template = "https://www.youtube.com/results?search_query={searchTerms}";}];
+                icon = "https://youtube.com/favicon.ico";
+                definedAliases = ["@yt" "@youtube"];
+              };
+              "reddit" = {
+                urls = [{template = "https://reddit.com/search?q={searchTerms}";}];
+                icon = "https://reddit.com/favicon.ico";
+                definedAliases = ["@reddit"];
+              };
               "Nix Packages" = {
                 urls = [{template = "https://search.nixos.org/packages?query={searchTerms}";}];
-                iconUpdateURL = "https://nixos.org/favicon.png";
+                icon = "https://nixos.org/favicon.png";
                 definedAliases = ["@np" "@nixpkgs"];
               };
               "NixOS Options" = {
                 urls = [{template = "https://search.nixos.org/packages?query={searchTerms}";}];
-                iconUpdateURL = "https://nixos.org/favicon.png";
+                icon = "https://nixos.org/favicon.png";
                 definedAliases = ["@no" "@nixos options"];
               };
               "NixOS Wiki" = {
                 urls = [{template = "https://nixos.wiki/index.php?search={searchTerms}";}];
-                iconUpdateURL = "https://nixos.wiki/favicon.png";
+                icon = "https://nixos.wiki/favicon.png";
                 definedAliases = ["@nw" "@nixos wiki"];
               };
               "ChatGPT" = {
                 urls = [{template = "https://chat.openai.com/?q={searchTerms}";}];
-                iconUpdateURL = "https://chat.openai.com/favicon.ico";
+                icon = "https://chat.openai.com/favicon.ico";
                 definedAliases = ["@cgpt" "@chatgpt"];
               };
               "SearXNG" = {
                 urls = [{template = "https://baresearch.org/search?q={searchTerms}";}];
-                iconUpdateURL = "https://raw.githubusercontent.com/searxng/searxng/master/src/brand/searxng-wordmark.svg";
+                icon = "https://raw.githubusercontent.com/searxng/searxng/master/src/brand/searxng-wordmark.svg";
                 definedAliases = ["@searxng" "@sx"];
-              };
-              "Reddit" = {
-                urls = [{template = "https://reddit.com/search?q={searchTerms}";}];
-                iconUpdateURL = "https://reddit.com/favicon.ico";
-                definedAliases = ["@reddit"];
               };
               "Baseball Reference" = {
                 urls = [{template = "https://www.baseball-reference.com/search/search.fcgi?hint=&search={searchTerms}";}];
-                iconUpdateURL = "https://www.baseball-reference.com/favicon.ico";
+                icon = "https://www.baseball-reference.com/favicon.ico";
                 definedAliases = ["@br" "@bref" "@baseballreference"];
               };
               "Pro Football Reference" = {
                 urls = [{template = "https://www.pro-football-reference.com/search/search.fcgi?hint=&search={searchTerms}";}];
-                iconUpdateURL = "https://www.pro-football-reference.com/favicon.ico";
+                icon = "https://www.pro-football-reference.com/favicon.ico";
                 definedAliases = ["@pfr" "@profootballreference"];
               };
               "College Football @ Sports Reference" = {
                 urls = [{template = "https://www.sports-reference.com/cfb/search/search.fcgi?hint=&search={searchTerms}";}];
-                iconUpdateURL = "https://www.sports-reference.com/cfb/favicon.ico";
+                icon = "https://www.sports-reference.com/cfb/favicon.ico";
                 definedAliases = ["@cfr" "@cfbr" "@collegefootballreference"];
               };
               "Arch Wiki" = {
                 urls = [{template = "https://wiki.archlinux.org/index.php?search={searchTerms}";}];
-                iconUpdateURL = "https://wiki.archlinux.org/favicon.ico";
+                icon = "https://wiki.archlinux.org/favicon.ico";
                 definedAliases = ["@archw" "@archwiki"];
-              };
-              "YouTube" = {
-                urls = [{template = "https://www.youtube.com/results?search_query={searchTerms}";}];
-                iconUpdateURL = "https://youtube.com/favicon.ico";
-                definedAliases = ["@yt" "@youtube"];
               };
               "Home Manager Option Search" = {
                 urls = [{template = "https://home-manager-options.extranix.com/?query={searchTerms}&release=master";}];
-                iconUpdateURL = "https://nixos.org/favicon.png";
+                icon = "https://nixos.org/favicon.png";
                 definedAliases = ["@hmo" "@homemanageroptions"];
               };
               "GitHub" = {
                 urls = [{template = "https://github.com/search?q={searchTerms}&type=repositories";}];
-                iconUpdateURL = "https://github.com/favicon.ico";
+                icon = "https://github.com/favicon.ico";
                 definedAliases = ["@gh" "@github"];
               };
             };

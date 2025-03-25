@@ -25,7 +25,6 @@ mylib.mkModule config "discord" {
       vesktop.enable = true;
       config = {
         themeLinks = [
-          "https://raw.githack.com/GeopJr/DNOME/dist/DNOME.css"
         ];
         plugins = {
           accountPanelServerProfile.enable = true;

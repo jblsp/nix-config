@@ -15,7 +15,6 @@ mylib.mkModule config "ghostty" {
         mouse-hide-while-typing = true;
         shell-integration-features = "no-cursor";
         theme = "catppuccin-mocha";
-        window-decoration = "none";
         window-theme = "ghostty";
       };
     };
