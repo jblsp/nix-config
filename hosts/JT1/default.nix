@@ -46,6 +46,7 @@
       networkmanagerapplet
       obs-studio
       vial
+      mpv
     ];
   };
 
