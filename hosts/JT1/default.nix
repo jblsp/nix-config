@@ -60,7 +60,7 @@
     plasma.enable = true;
     shell.enable = true;
     ssh.enable = true;
-    theme.enable = true;
+    thunderbird.enable = true;
     waybar.enable = true;
   };
 
